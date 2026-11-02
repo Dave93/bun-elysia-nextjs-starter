@@ -4,7 +4,7 @@ import type { NextConfig } from "next"
 try {
   process.loadEnvFile("../../.env")
 } catch {
-  // No root .env (CI, or variables set by the host) — fall back to defaults.
+  // No root .env (variables set by the host) — fall back to defaults.
 }
 
 const apiUrl = process.env.API_URL ?? "http://localhost:3001"

@@ -14,7 +14,7 @@ it is written for this repository and stays deliberately minimal.
 
 ## What is in
 
-- `apps/api` — Elysia on Bun: Better Auth handler at `/api/auth/*`, a `session`
+- `apps/api` — Elysia on Bun: Better Auth handler at `/api/auth/*`, an `auth`
   macro for protected routes, one example resource (`notes`) with validation,
   OpenAPI at `/api/docs`, tests with `bun test`.
 - `apps/web` — Next.js (App Router), Tailwind CSS v4: sign-up, sign-in, sign-out,
@@ -32,7 +32,7 @@ Where the README points to ShipKit for them, it says so once, in one table.
 
 ## Conventions
 
-- Same origin in development: Next.js rewrites `/api/*` to the API, so the
+- Same origin: Next.js rewrites `/api/*` to the API, so the
   Better Auth cookie is first-party for both apps and CORS never comes up.
 - One environment file at the repository root (`.env`), read by both apps.
 - No code lands without a test or a check that runs in CI.

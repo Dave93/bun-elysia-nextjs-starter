@@ -88,4 +88,25 @@ describe("api", () => {
     )
     expect(res.status).toBe(404)
   })
+
+  it("does not show one user's notes to another user", async () => {
+    const owner = await signUp()
+    const created = await app.handle(
+      new Request(url("/api/notes"), {
+        method: "POST",
+        headers: { cookie: owner, origin, "content-type": "application/json" },
+        body: JSON.stringify({ title: "Private" }),
+      }),
+    )
+    expect(created.status).toBe(201)
+
+    // The owner's note exists while the stranger lists, so an unscoped query
+    // would return it here even on a fresh database.
+    const stranger = await signUp()
+    const list = await app.handle(
+      new Request(url("/api/notes"), { headers: { cookie: stranger, origin } }),
+    )
+    expect(list.status).toBe(200)
+    expect(await list.json()).toEqual([])
+  })
 })
